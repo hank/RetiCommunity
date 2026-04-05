@@ -37,7 +37,7 @@ print(f"`F555Posted by `!{post['author']}`!  ·  {ts}`f")
 print()
 print("-")
 print()
-print(post["body"])
+print(template.linkify(post["body"]))
 print()
 print("-")
 print()
@@ -51,7 +51,7 @@ if comments:
     for c in comments:
         cts = datetime.fromtimestamp(c["timestamp"]).strftime("%Y-%m-%d %H:%M")
         print(f"`F{color}`!{c['author']}`!`f  `F555{cts}`f")
-        print(c["body"])
+        print(template.linkify(c["body"]))
         print()
 else:
     print("`F555No comments yet.`f")
