@@ -25,11 +25,11 @@ _nav = (
     f"`F777"
     f"`_`[🏠 Index`:/page/{_r}/index.mu]`_`f"
     f"  `F555·`f  "
-    f"`_`[📅`:/page/{_r}/board.mu`section=community_events]`_"
-    f"  `_`[🔄`:/page/{_r}/board.mu`section=buy_sell_trade]`_"
-    f"  `_`[📢`:/page/{_r}/board.mu`section=announcements]`_"
-    f"  `_`[🛠`:/page/{_r}/board.mu`section=work_offers]`_"
-    f"  `_`[🙋`:/page/{_r}/board.mu`section=work_requests]`_"
+    f"`_`[📅 Events`:/page/{_r}/board.mu`section=community_events]`_"
+    f"  `_`[🔄 Buy/Sell`:/page/{_r}/board.mu`section=buy_sell_trade]`_"
+    f"  `_`[📢 Announce`:/page/{_r}/board.mu`section=announcements]`_"
+    f"  `_`[🛠 Offers`:/page/{_r}/board.mu`section=work_offers]`_"
+    f"  `_`[🙋 Requests`:/page/{_r}/board.mu`section=work_requests]`_"
     f"`f"
 )
 
