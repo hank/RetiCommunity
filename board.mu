@@ -13,6 +13,7 @@ section = settings.sections.get(section_id) or settings.sections["community_even
 page = max(1, int(os.environ.get("var_page", "1")))
 per_page = 20
 color = section["color"]
+privileged = template.is_privileged(os.environ.get("remote_identity", ""))
 
 print(template.header)
 print(f"`F{color}`!{section['icon']}  {section['title']}`!`f")
@@ -35,8 +36,9 @@ else:
         ts = datetime.fromtimestamp(post["timestamp"]).strftime("%Y-%m-%d")
         n_comments = len(post.get("comments", []))
         reply_str = f"{n_comments} repl{'y' if n_comments == 1 else 'ies'}"
+        del_link = f"  `Ff54`_`[Delete`:/page/{root}/delete_post.mu`section={section_id}|post_id={post['id']}]`_`f" if privileged else ""
         print(f"`F{color}`_`[{post['title']}`:/page/{root}/post.mu`section={section_id}|post_id={post['id']}]`_`f")
-        print(f"`F555  {post['author']}  ·  {ts}  ·  {reply_str}`f")
+        print(f"`F555  {post['author']}  ·  {ts}  ·  {reply_str}`f{del_link}")
         print()
 
 # Pagination

@@ -11,6 +11,7 @@ root = settings.root_folder
 section_id = os.environ.get("var_section", "")
 post_id = os.environ.get("var_post_id", "")
 section = settings.sections.get(section_id, {})
+privileged = template.is_privileged(os.environ.get("remote_identity", ""))
 
 print(template.header)
 
@@ -33,7 +34,8 @@ color = section.get("color", "fff")
 ts = datetime.fromtimestamp(post["timestamp"]).strftime("%Y-%m-%d %H:%M")
 
 print(f"`F{color}`!{post['title']}`!`f")
-print(f"`F555Posted by `!{post['author']}`!  ·  {ts}`f")
+del_post = f"  `Ff54`_`[Delete Post`:/page/{root}/delete_post.mu`section={section_id}|post_id={post_id}]`_`f" if privileged else ""
+print(f"`F555Posted by `!{post['author']}`!  ·  {ts}`f{del_post}")
 print()
 print("-")
 print()
@@ -50,7 +52,8 @@ print()
 if comments:
     for c in comments:
         cts = datetime.fromtimestamp(c["timestamp"]).strftime("%Y-%m-%d %H:%M")
-        print(f"`F{color}`!{c['author']}`!`f  `F555{cts}`f")
+        del_comment = f"  `Ff54`_`[Delete`:/page/{root}/delete_comment.mu`section={section_id}|post_id={post_id}|comment_id={c.get('id','')}]`_`f" if privileged and c.get("id") else ""
+        print(f"`F{color}`!{c['author']}`!`f  `F555{cts}`f{del_comment}")
         print(template.linkify(c["body"]))
         print()
 else:

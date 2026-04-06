@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 root_folder = "reticommunity"
 
+# RNS identity hashes (32 hex chars) for privileged users.
+# Admins and moderators currently share the same permissions (delete posts/comments).
+admins = [
+    "3e22ab108ffaa3ba5d7153946b162b55",
+]
+
+moderators = [
+    # "aabbccaabbccaabbccaabbccaabbcc",
+]
+
 board_name = "RetiCommunity"
 board_tagline = "Community Message Board"
 

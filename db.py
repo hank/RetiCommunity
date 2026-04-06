@@ -54,6 +54,7 @@ def add_comment(section, post_id, author, body):
     for post in posts:
         if post["id"] == post_id:
             comment = {
+                "id": str(uuid.uuid4())[:8],
                 "author": author or "Anonymous",
                 "body": body,
                 "timestamp": int(time.time()),
@@ -62,3 +63,19 @@ def add_comment(section, post_id, author, body):
             _save_posts(section, posts)
             return comment
     return None
+
+
+def delete_post(section, post_id):
+    posts = get_posts(section)
+    posts = [p for p in posts if p["id"] != post_id]
+    _save_posts(section, posts)
+
+
+def delete_comment(section, post_id, comment_id):
+    posts = get_posts(section)
+    for post in posts:
+        if post["id"] == post_id:
+            post["comments"] = [c for c in post["comments"] if c.get("id") != comment_id]
+            _save_posts(section, posts)
+            return True
+    return False

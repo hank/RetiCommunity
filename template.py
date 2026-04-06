@@ -4,6 +4,14 @@ import settings
 
 _LXM_RE = re.compile(r'lxm://([a-fA-F0-9]+)|lxmf@([a-fA-F0-9]+)')
 
+def is_privileged(remote_identity):
+    """Return True if the remote identity hash is an admin or moderator."""
+    if not remote_identity:
+        return False
+    h = remote_identity.lower()
+    return h in [x.lower() for x in settings.admins + settings.moderators]
+
+
 def linkify(text):
     """Replace lxm://<hash> and lxmf@<hash> occurrences with micron links."""
     def _replace(m):
